@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Table &amp; Thyme{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark site-navbar">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="{% url 'dashboard' %}"><span class="brand-mark">T</span> Table &amp; Thyme</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <div class="navbar-nav ms-auto align-items-lg-center">
+        {% if user.is_authenticated %}
+          <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+          <a class="nav-link" href="{% url 'reservation_list' %}">Reservations</a>
+          <a class="nav-link" href="{% url 'reservation_create' %}">Book a Table</a>
+          <span class="navbar-text text-light px-lg-3">Hi, {{ user.username }}</span>
+          <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="btn btn-outline-light btn-sm">Logout</button></form>
+        {% else %}
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+          <a class="btn btn-light btn-sm ms-lg-2" href="{% url 'register' %}">Register</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>
+<main class="container py-4">
+  {% if messages %}{% for message in messages %}
+    <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show" role="alert">
+      {{ message }}<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  {% endfor %}{% endif %}
+  {% block content %}{% endblock %}
+</main>
+<footer class="site-footer text-center py-4">Restaurant Table Reservation System · Academic Project</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'js/validation.js' %}"></script>
+</body>
+</html>

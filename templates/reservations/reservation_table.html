@@ -1,0 +1,13 @@
+<div class="table-responsive card p-2">
+<table class="table table-hover align-middle mb-0">
+<thead><tr><th>Booking</th><th>Date &amp; time</th><th>Guests</th><th>Table</th><th>Status</th></tr></thead>
+<tbody>
+{% for r in reservations %}
+<tr>
+<td><strong>{{ r.customer_name }}</strong><small class="d-block text-muted">{{ r.phone }}</small></td>
+<td>{{ r.reservation_date|date:"d M Y" }}<small class="d-block text-muted">{{ r.reservation_time|time:"H:i" }}</small></td>
+<td>{{ r.guests }}</td><td>Table {{ r.table_number }}</td>
+<td><span class="badge {% if r.status == 'Confirmed' %}bg-success{% elif r.status == 'Cancelled' %}bg-danger{% elif r.status == 'Completed' %}bg-primary{% else %}bg-warning text-dark{% endif %}">{{ r.status }}</span></td>
+</tr>
+{% empty %}<tr><td colspan="5" class="text-center text-muted py-4">No reservations yet. Book a table to see it here.</td></tr>{% endfor %}
+</tbody></table></div>

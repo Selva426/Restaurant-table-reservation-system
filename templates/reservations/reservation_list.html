@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Reservations | Table &amp; Thyme{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div><h1 class="h2 mb-1">My Reservations</h1><p class="text-muted mb-0">Search and manage your bookings.</p></div>
+  <a class="btn btn-primary" href="{% url 'reservation_create' %}">Book a Table</a>
+</div>
+<form method="get" class="card card-body mb-3">
+<div class="row g-2">
+  <div class="col-md-4"><input class="form-control" name="q" value="{{ q }}" placeholder="Search name or phone"></div>
+  <div class="col-md-3">
+    <input class="form-control" type="date" name="date" value="{{ date_filter }}">
+    {% if date_error %}<small class="text-danger">{{ date_error }}</small>{% endif %}
+  </div>
+  <div class="col-md-3"><select class="form-select" name="status"><option value="">All statuses</option>{% for value,label in statuses %}<option value="{{ value }}" {% if status_filter == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></div>
+  <div class="col-md-2 d-grid"><button class="btn btn-secondary">Filter</button></div>
+</div>
+</form>
+<div class="table-responsive card p-2">
+<table class="table table-hover align-middle mb-0">
+<thead><tr><th>Booking</th><th>Date &amp; time</th><th>Guests</th><th>Table</th><th>Status</th><th>Actions</th></tr></thead>
+<tbody>{% for r in reservations %}
+<tr>
+<td><strong>{{ r.customer_name }}</strong><small class="d-block text-muted">{{ r.phone }}</small></td>
+<td>{{ r.reservation_date|date:"d M Y" }}<small class="d-block text-muted">{{ r.reservation_time|time:"H:i" }}</small></td>
+<td>{{ r.guests }}</td><td>Table {{ r.table_number }}</td>
+<td><span class="badge {% if r.status == 'Confirmed' %}bg-success{% elif r.status == 'Cancelled' %}bg-danger{% elif r.status == 'Completed' %}bg-primary{% else %}bg-warning text-dark{% endif %}">{{ r.status }}</span></td>
+<td class="text-nowrap"><a class="btn btn-sm btn-outline-primary" href="{% url 'reservation_update' r.pk %}">Edit</a> <a class="btn btn-sm btn-outline-danger" href="{% url 'reservation_delete' r.pk %}">Delete</a></td>
+</tr>
+{% empty %}<tr><td colspan="6" class="text-center text-muted py-4">No reservations match your filters.</td></tr>{% endfor %}</tbody>
+</table></div>
+{% endblock %}
