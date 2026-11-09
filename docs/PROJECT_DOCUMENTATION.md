@@ -4,14 +4,14 @@
 **GitHub Repository:** https://github.com/Selva426/Restaurant-table-reservation-system
 
 ### 1. Project Introduction
-The Restaurant Table Reservation System is a web-based application developed using Python Django. It allows customers to create accounts, log in, reserve restaurant tables, and manage their own bookings. The application stores reservation details in a MySQL database and provides search and filtering facilities.
+The Restaurant Table Reservation System is an individual Python full-stack project. It lets customers create accounts, log in, reserve restaurant tables, and manage their own bookings. Django handles the backend, while MySQL stores reservation data. Search and filters make bookings easier to find.
 
 ### 2. Project Objectives
-- Provide an online method for customers to reserve restaurant tables.
-- Reduce manual reservation record handling.
-- Allow customers to view, update and delete their bookings.
-- Store reservation data securely in a relational database.
-- Demonstrate Python, Django, MySQL and frontend development skills.
+- Provide customers with an online way to reserve restaurant tables.
+- Reduce manual handling of reservation records.
+- Let customers view, update, and delete their own bookings.
+- Store reservation data in a relational database.
+- Apply Python, Django, MySQL, and frontend development skills in one project.
 
 ### 3. Technologies Used
 | Layer | Technology |
@@ -30,7 +30,7 @@ The Restaurant Table Reservation System is a web-based application developed usi
 **Software:** Windows 10/11 (or compatible OS), Python 3.10+, MySQL Server 8+, web browser, VS Code or another code editor, Git.
 
 ### 5. Database Design
-The system uses Django's built-in authentication tables and a custom `reservations_reservation` table.
+The database uses Django's built-in authentication tables and a custom `reservations_reservation` table.
 
 **Reservation fields**
 | Field | Type | Description |
@@ -47,37 +47,36 @@ The system uses Django's built-in authentication tables and a custom `reservatio
 | status | Varchar(20) | Pending, Confirmed, Cancelled or Completed |
 | created_at | Date/time | Record creation timestamp |
 
-**Relationship:** One user can create many reservations. Each reservation belongs to exactly one user. The customer foreign key uses cascade deletion.
+**Relationship:** One user can create many reservations, and each reservation belongs to one user. The customer foreign key uses cascade deletion.
 
-**Validation:** The Django reservation form checks that a table, date and time combination is not already reserved by a non-cancelled booking.
+**Validation:** The Django form checks reservation dates and phone numbers. It also rejects a table/date/time combination that is already reserved by a non-cancelled booking.
 
 ### 6. Module Description
-1. **Registration module:** Creates a customer account using Django's built-in user authentication.
-2. **Login and logout module:** Authenticates customers and safely ends their session.
-3. **Dashboard module:** Displays total, pending and confirmed reservation counts and recent bookings.
-4. **Reservation module:** Creates and displays reservation records.
-5. **Update module:** Allows the owner of a reservation to edit booking details.
-6. **Delete module:** Uses a confirmation page before deleting a reservation.
-7. **Search and filter module:** Searches customer name/phone and filters by date/status.
-8. **Validation module:** JavaScript provides quick client-side checks; Django forms validate submitted data on the server.
-9. **Admin module:** Django admin allows an authorized administrator to inspect and manage reservation records.
+1. **Registration:** Django's built-in user form creates customer accounts.
+2. **Login and logout:** Django authentication signs customers in and ends their sessions.
+3. **Dashboard:** Displays reservation totals, status counts, and recent bookings.
+4. **Reservations:** Customers can create and view their reservation records.
+5. **Update:** Customers can edit their own booking details.
+6. **Delete:** A confirmation page appears before a reservation is deleted.
+7. **Search and filters:** Customers can search by name or phone and filter by date or status.
+8. **Validation:** JavaScript provides quick client-side checks, while Django forms validate submissions on the server.
+9. **Admin:** Django admin lets an authorized administrator inspect and manage reservation records.
 
-### 7. Execution Procedure
+### 7. How I Run the Project
 1. Install Python and MySQL Server.
 2. Create the `restaurant_db` database and `restaurant_app` user in MySQL as described in the README.
-3. Create a Python virtual environment and install `requirements.txt`.
-4. Copy `.env.example` to `.env` and set your local database credentials and Django secret key. Never commit `.env`.
-5. Run `python manage.py migrate`.
-6. Run `python manage.py createsuperuser`.
-7. Run `python manage.py runserver`.
-8. Open `http://127.0.0.1:8000/` in a browser and test the modules.
+3. Create a Python virtual environment and install the packages from `requirements.txt`.
+4. Copy `.env.example` to `.env` and enter local database credentials and a Django secret key. Do not commit `.env`.
+5. Run `python manage.py migrate` to create the tables.
+6. Run `python manage.py createsuperuser` to create an administrator account.
+7. Run `python manage.py runserver` and open `http://127.0.0.1:8000/` in a browser.
 
 ### 8. Testing
-Automated verification: all 6 Django workflow tests pass using an isolated in-memory SQLite test database. They cover registration/login/logout, protected pages, reservation create/update/delete, dashboard counts, name and phone search, date/status filtering, form validation, duplicate table/time prevention, cancelled bookings, and reservation ownership.
+Six Django workflow tests passed using an isolated in-memory SQLite test database. They cover registration/login/logout, protected pages, reservation create/update/delete, dashboard counts, name and phone search, date/status filtering, form validation, duplicate table/time prevention, cancelled bookings, and reservation ownership.
 
-Live MySQL verification: Django's system check and read-only migration check passed. In a browser, registration, dashboard, reservation creation and update, phone/date/status filtering, deletion, and logout passed. Temporary demonstration accounts and bookings were removed. The automated SQLite tests cover validation, duplicate prevention, and ownership checks.
+The app was also checked against the configured MySQL database. Django's system check and read-only migration check passed. Browser checks covered registration, the dashboard, reservation creation and update, phone/date/status filtering, deletion, and logout. Validation, duplicate prevention, and reservation ownership were checked by the automated tests.
 
-Perform the following tests and record the actual result:
+The test checklist covered:
 - Valid customer registration and login.
 - Successful reservation creation.
 - Reservation list displays saved records.
@@ -90,7 +89,7 @@ Perform the following tests and record the actual result:
 - Logout and protected-page access.
 
 ### 9. Screenshots
-The following screenshots were captured from the running application. The dashboard, reservation list, and admin screenshots show fictional sample bookings entered through the web forms. The local sample account and bookings remain in MySQL for the database screenshot; do not use demo credentials for deployment.
+These screenshots were captured from the running application. The dashboard, reservation list, and admin pages show fictional sample bookings entered through the web forms. The local sample account and bookings remain in MySQL for the database screenshot; demo credentials should not be used for deployment.
 
 **Figure 1: Registration page**
 
@@ -129,11 +128,11 @@ The following screenshots were captured from the running application. The dashbo
 ![MySQL Workbench reservation table](../screenshots/mysql-database.png)
 
 ### 10. Conclusion
-The Restaurant Table Reservation System demonstrates the development of a Python full-stack web application using Django and MySQL. It includes authentication, reservation management, CRUD operations, search, filtering, validation and a responsive user interface. The project provides practical experience in backend development, database connectivity and frontend-backend integration.
+This project applies Python, Django, MySQL, HTML, CSS, Bootstrap, and JavaScript to a full-stack reservation application. It includes authentication, reservation CRUD, search, filtering, and validation, with both automated tests and live MySQL checks. Building it provided practical experience connecting the frontend, backend, and database.
 
 ### 11. Future Enhancements
-- Real-time table availability calendar.
-- Email or SMS booking confirmation.
-- Restaurant opening-hour and seating-capacity management.
-- Online payment integration.
-- Administrator approval workflow.
+- Add a real-time table availability calendar.
+- Send email or SMS booking confirmations.
+- Manage restaurant opening hours and table capacity.
+- Add online payments.
+- Add an administrator approval workflow.
