@@ -96,8 +96,8 @@ python manage.py test reservations --settings=restaurant_project.test_settings
 
 All six automated tests passed. Live browser checks against MySQL covered registration, login, reservation creation and updates, dashboard counts, name/phone search, date/status filters, deletion, and logout. Validation, duplicate table/time prevention, and reservation ownership are covered by the automated tests.
 
-## GitHub upload
-The project is published at https://github.com/Selva426/Restaurant-table-reservation-system. The repository includes the source, migrations, tests, documentation, and screenshots. The local `.env` file is not tracked.
+## Repository
+Source code, migrations, tests, documentation, and screenshots are available at [GitHub](https://github.com/Selva426/Restaurant-table-reservation-system). The local `.env` file is not tracked.
 
 ## Important project note
 The current version represents restaurant tables with numbers 1–50 and allows customers to enter a reservation time. A future version could use a managed table inventory and defined opening hours.
