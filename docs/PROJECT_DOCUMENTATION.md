@@ -1,6 +1,8 @@
 # PROJECT DOCUMENTATION
 ## Restaurant Table Reservation System
 
+**GitHub Repository:** https://github.com/Selva426/Restaurant-table-reservation-system
+
 ### 1. Project Introduction
 The Restaurant Table Reservation System is a web-based application developed using Python Django. It allows customers to create accounts, log in, reserve restaurant tables, and manage their own bookings. The application stores reservation details in a MySQL database and provides search and filtering facilities.
 
